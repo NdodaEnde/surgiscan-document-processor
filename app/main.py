@@ -584,7 +584,22 @@ async def get_statistics(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve statistics"
         )
-
+@app.get("/")
+async def root():
+    """Root endpoint - provides basic service information"""
+    return {
+        "service": "SurgiScan Document Processing Microservice",
+        "version": "1.0.0",
+        "status": "running",
+        "description": "AI-powered medical document processing service",
+        "endpoints": {
+            "health": "/health",
+            "docs": "/docs",
+            "upload": "/api/v1/historic-documents/upload",
+            "statistics": "/api/v1/statistics"
+        },
+        "documentation": "Visit /docs for interactive API documentation"
+    }
 
 # =============================================================================
 # APPLICATION STARTUP
