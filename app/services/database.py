@@ -99,7 +99,7 @@ class DatabaseManager:
             document_record = {
                 "_id": document_id,
                 "document_id": document_id,
-                "filename": filename,
+                "document_filename": filename,
                 "status": processing_result.get('status', ProcessingStatus.COMPLETED),
                 "document_types": list(processing_result.get('extracted_data', {}).keys()),
                 "extracted_data": processing_result.get('extracted_data', {}),
@@ -128,7 +128,7 @@ class DatabaseManager:
             log_database_operation(
                 logger, "insert", "historic_documents",
                 document_id=document_id,
-                filename=filename,
+                document_filename=filename,
                 document_types=len(document_record["document_types"]),
                 patient_id=patient_info.get('id_number')
             )
@@ -137,7 +137,7 @@ class DatabaseManager:
             
         except Exception as e:
             logger.error(f"Failed to save processing result: {e}", 
-                        extra={"document_id": document_id, "filename": filename})
+                        extra={"document_id": document_id, "document_filename": filename})
             raise
     
     async def get_document_by_id(self, document_id: str) -> Optional[Dict[str, Any]]:
