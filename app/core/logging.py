@@ -181,7 +181,7 @@ def log_processing_start(logger: logging.Logger, document_id: str, filename: str
         "Starting document processing",
         extra={
             'document_id': document_id,
-            'filename': filename,
+            'document_filename': filename,
             'processing_mode': mode,
             'event': 'processing_started'
         }
